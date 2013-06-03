@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="admin_site.xhtml">
+            <ui:define name="content">
+                <h2>Film</h2>
+                <h:form>
+                <h:dataTable border="1" value="#{filmBean.getFilmy()}" var="film">
+                    <h:column>
+                        <f:facet name="header">
+                            Nazwa
+                        </f:facet>
+                        <h:outputLabel value="#{film.nazwa}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            Kategoria wiekowa
+                        </f:facet>
+                        <h:outputLabel value="#{film.kategoriaWiekowa}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            Czas trwania
+                        </f:facet>
+                        <h:outputLabel value="#{film.czasTrwania}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            Opis
+                        </f:facet>
+                        <h:outputLabel value="#{film.opis}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            Opcje
+                        </f:facet>
+                        <h:commandLink action="#{filmBean.deleteFilm(film.id)}" value="usuń" /> &nbsp;
+                            <h:commandLink action="#{filmBean.toModifyFilm(film.id,film.nazwa, film.kategoriaWiekowa, film.czasTrwania, film.opis)}" value="modyfikuj" />                   
+                    </h:column>
+                </h:dataTable>
+                 </h:form>
+                <h:link outcome="admin_add_film.xhtml" value="dodaj film"/>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

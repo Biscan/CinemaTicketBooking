@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2013-05-31 18:05:34 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="klasy.Sala" table="sala" catalog="matepod">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="szerokosc" type="int">
+            <column name="szerokosc" not-null="true" />
+        </property>
+        <property name="wysokosc" type="int">
+            <column name="wysokosc" not-null="true" />
+        </property>
+        <property name="numer" type="int">
+            <column name="numer" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

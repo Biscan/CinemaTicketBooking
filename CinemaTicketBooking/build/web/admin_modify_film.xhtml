@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="admin_site.xhtml">
+            <ui:define name="content">
+                <h2>Modyfikuj Film</h2>
+                <h:form id="form">
+                    <h:panelGrid columns="3">
+                        <h:outputLabel value="Nazwa filmu" />
+                        <h:inputText id="Nazwa" value="#{filmBean.nazwa}">
+                            <f:validator validatorId="nameValidator.pl" />
+                        </h:inputText>
+                        <h:message for="Nazwa"  />                     
+                        <h:outputLabel value="Kategoria wiekowa" />
+                        <h:selectOneMenu id="wiek" value="#{filmBean.wiek}" required="true">
+                            <f:selectItem itemValue="3" itemLabel="3" />
+                            <f:selectItem itemValue="12" itemLabel="12" />
+                            <f:selectItem itemValue="16" itemLabel="16" />
+                            <f:selectItem itemValue="18" itemLabel="18" />
+                        </h:selectOneMenu>  
+                        <h:message for="wiek" />
+                        <h:outputLabel value="Czas trwania" />
+                        <h:inputText id="czas" value="#{filmBean.czas}" required="true">
+                            <f:validator validatorId="timeValidator.pl" />
+                        </h:inputText>
+                        <h:message for="czas" />
+                        <h:outputLabel value="Opis" />
+                        <h:inputTextarea id="opis" value="#{filmBean.opis}" />
+                        <h:message for="opis" />
+                    </h:panelGrid>
+                    <h:inputHidden value="#{filmBean.id}" />
+                    <h:commandButton value="Zmień" action="#{filmBean.modifyFilm}" />
+                </h:form>
+                
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+
