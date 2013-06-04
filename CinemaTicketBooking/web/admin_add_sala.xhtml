@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="admin_site.xhtml">
+            <ui:define name="content">
+                <h2>Dodaj Film</h2>
+                <h:form id="form">
+                    <h:panelGrid columns="3">
+                        <h:outputLabel value="Wysokość" />
+                        <h:inputText id="wys" value="#{salaBean.wysokosc}">
+                            <f:validator validatorId="timeValidator.pl" />
+                        </h:inputText>
+                        <h:message for="wys"  />                     
+                        <h:outputLabel value="Szerokosc" />
+                        <h:inputText id="szer" value="#{salaBean.szerokosc}" required="true">
+                        </h:inputText>  
+                        <h:message for="szer" />
+                        <h:outputLabel value="Numer" />
+                        <h:inputText id="num" value="#{salaBean.numer}" required="true">
+                            <f:validator validatorId="timeValidator.pl" />
+                        </h:inputText>
+                        <h:message for="num" />
+                    </h:panelGrid>
+                    <h:commandButton value="Dodaj" action="#{salaBean.addSala()}" />
+                </h:form>
+                
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

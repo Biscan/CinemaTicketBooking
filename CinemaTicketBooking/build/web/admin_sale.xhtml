@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
     <h:head>
         <title>Facelet Title</title>
     </h:head>
@@ -10,6 +11,27 @@
         <ui:composition template="admin_site.xhtml">
             <ui:define name="content">
                 <h2>Sale</h2>
+                <h:dataTable border="1" value="#{salaBean.getSale()}" var="sala">
+                    <h:column>
+                        <f:facet name="header">
+                            Wysokość
+                        </f:facet>
+                        <h:outputLabel value="#{salaBean.wysokosc}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            Szerokość
+                        </f:facet>
+                        <h:outputLabel value="#{salaBean.szerokosc}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            Numer
+                        </f:facet> 
+                        <h:outputLabel value="#{salaBean.numer}" />
+                    </h:column>
+              </h:dataTable>
+                <h:link outcome="admin_add_sala.xhtml" value="Dodaj salę" />
             </ui:define>
         </ui:composition>
     </h:body>

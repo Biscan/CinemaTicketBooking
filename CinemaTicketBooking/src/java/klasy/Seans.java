@@ -53,9 +53,6 @@ public class Seans  implements java.io.Serializable {
         this.data = data;
     }
 
-
-
-
 }
 
 
