@@ -14,21 +14,30 @@
                 <h:dataTable border="1" value="#{salaBean.getSale()}" var="sala">
                     <h:column>
                         <f:facet name="header">
-                            Wysokość
+                            Ilość rzędów
                         </f:facet>
-                        <h:outputLabel value="#{salaBean.wysokosc}" />
+                        <h:outputLabel value="#{sala.wysokosc}" />
                     </h:column>
                     <h:column>
                         <f:facet name="header">
-                            Szerokość
+                            Ilość miejsc w rzędzie
                         </f:facet>
-                        <h:outputLabel value="#{salaBean.szerokosc}" />
+                        <h:outputLabel value="#{sala.szerokosc}" />
                     </h:column>
                     <h:column>
                         <f:facet name="header">
-                            Numer
+                            Numer sali
                         </f:facet> 
-                        <h:outputLabel value="#{salaBean.numer}" />
+                        <h:outputLabel value="#{sala.numer}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            Opcje
+                        </f:facet>
+                        <h:form>
+                            <h:commandLink value="modyfikuj" action="#{salaBean.toModifySala(sala.id, sala.wysokosc, sala.szerokosc, sala.numer)}" /> &nbsp; 
+                            <h:commandLink action="#{salaBean.deleteSala(sala.id)}" value="Usuń"  />
+                        </h:form>
                     </h:column>
               </h:dataTable>
                 <h:link outcome="admin_add_sala.xhtml" value="Dodaj salę" />
