@@ -6,7 +6,8 @@ package beany;
 
 import java.util.List;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
+import org.hibernate.exception.ConstraintViolationException;
 import klasy.Sala;
 import org.hibernate.Session;
 
@@ -15,7 +16,7 @@ import org.hibernate.Session;
  * @author mateusz
  */
 @ManagedBean
-@RequestScoped
+@SessionScoped
 public class SalaBean {
 
     /**
@@ -25,17 +26,32 @@ public class SalaBean {
     int wysokosc;
     int szerokosc;
     int numer;
+    String errMessage;
     public SalaBean() 
     {
         
     }
     public String addSala()
     {
+        errMessage = "";
         Session session = klasy.HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
         Sala sala = new Sala(wysokosc, szerokosc, numer);
-        session.save(sala);        
-        session.getTransaction().commit();
+        try
+        {
+            session.save(sala);
+            session.getTransaction().commit();
+            wysokosc = 0;
+            szerokosc = 0;
+            numer = 0;
+        }
+        catch(Exception ex)
+        {
+            errMessage = "Istnieje już sala o takim numerze!";
+            session.getTransaction().rollback();
+            return "admin_add_sala";
+        }            
+        
         return "admin_sale";
     }
     public String deleteSala(int salaId)
@@ -45,7 +61,7 @@ public class SalaBean {
         Sala sala = (Sala)session.get(Sala.class, salaId);
         session.delete(sala);
         session.getTransaction().commit();
-        return "admin_filmy";
+        return "admin_sale";
     }
     public String toModifySala(int id, int wysokosc,int szerokosc,int numer)
     {
@@ -54,10 +70,11 @@ public class SalaBean {
         this.szerokosc = szerokosc;
         this.numer = numer;
        
-        return "admin_modify_seans";
+        return "admin_modify_sale";
     }
     public String modifySala()
     {
+        errMessage = "";
         System.out.println("jest");
         Session session = klasy.HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
@@ -67,10 +84,22 @@ public class SalaBean {
         sala.setWysokosc(wysokosc);
         sala.setSzerokosc(szerokosc);
         sala.setNumer(numer);
-        session.update(sala);
-        session.getTransaction().commit();
+        try
+        {
+            session.update(sala);
+            session.getTransaction().commit();
+            wysokosc = 0;
+            szerokosc = 0;
+            numer = 0;
+        }
+        catch(ConstraintViolationException ex)
+        {
+            errMessage = "Istnieje już sala o takim numerze!";
+            session.getTransaction().rollback();
+            return "admin_modify_sale";
+        }
 
-        return "admin_seanse";
+        return "admin_sale";
     }
     public List<Sala> getSale()
     {
@@ -111,6 +140,14 @@ public class SalaBean {
 
     public void setNumer(int numer) {
         this.numer = numer;
+    }
+
+    public String getErrMessage() {
+        return errMessage;
+    }
+
+    public void setErrMessage(String errMessage) {
+        this.errMessage = errMessage;
     }
     
 }
