@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="admin_site.xhtml">
+            <ui:define name="content">
+                <h2>Dodaj Film</h2>
+                <h:form id="form">
+                    <h:panelGrid columns="3">
+                        <h:outputLabel value="Film" />
+                        <h:selectOneMenu id="film" value="#{seansBean.idFilmu}" >
+                            <f:selectItems value="#{seansBean.getFilmy()}" />
+                        </h:selectOneMenu>
+                        <h:message for="film" />
+                        <h:outputLabel value="Numer sali" />
+                        <h:selectOneMenu id="sala" value="#{seansBean.idSali}">
+                            <f:selectItems value="#{seansBean.getSale()}" />
+                        </h:selectOneMenu>
+                        <h:message for="sala" />
+                        <h:outputLabel value="Data i godzina" />
+                        <h:inputText id="data" value="#{seansBean.data}">
+                            <f:convertDateTime dateStyle="short" timeZone="EST" type="both" />
+                        </h:inputText> 
+                        <h:message for="data" />
+                    </h:panelGrid>
+                    <h:commandButton value="Dodaj" action="#{seansBean.addSeans()}" />
+                </h:form>
+                
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

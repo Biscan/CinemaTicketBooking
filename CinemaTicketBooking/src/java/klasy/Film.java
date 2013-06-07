@@ -1,6 +1,9 @@
 package klasy;
 // Generated 2013-05-31 18:05:26 by Hibernate Tools 3.2.1.GA
 
+import java.util.Set;
+
+
 
 
 /**
@@ -14,19 +17,20 @@ public class Film  implements java.io.Serializable {
      private int kategoriaWiekowa;
      private int czasTrwania;
      private String opis;
-
+     private Set<Seans> seanse;
+     
     public Film() {
     }
 
 	
     public Film(String nazwa, int kategoriaWiekowa, int czasTrwania) {
-        this.id = id;
+        //this.id = id;
         this.nazwa = nazwa;
         this.kategoriaWiekowa = kategoriaWiekowa;
         this.czasTrwania = czasTrwania;
     }
     public Film(String nazwa, int kategoriaWiekowa, int czasTrwania, String opis) {
-       this.id = id;
+       //this.id = id;
        this.nazwa = nazwa;
        this.kategoriaWiekowa = kategoriaWiekowa;
        this.czasTrwania = czasTrwania;

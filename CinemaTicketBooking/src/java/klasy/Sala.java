@@ -1,6 +1,9 @@
 package klasy;
 // Generated 2013-05-31 18:05:26 by Hibernate Tools 3.2.1.GA
 
+import java.util.Set;
+
+
 
 
 /**
@@ -13,7 +16,6 @@ public class Sala  implements java.io.Serializable {
      private int szerokosc;
      private int wysokosc;
      private int numer;
-
     public Sala() {
     }
 

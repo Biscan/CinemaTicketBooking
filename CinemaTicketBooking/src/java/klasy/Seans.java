@@ -14,7 +14,7 @@ public class Seans  implements java.io.Serializable {
      private int idFilmu;
      private int idSali;
      private Date data;
-
+     
     public Seans() {
     }
 
@@ -23,6 +23,7 @@ public class Seans  implements java.io.Serializable {
        this.idSali = idSali;
        this.data = data;
     }
+    
    
     public Integer getId() {
         return this.id;
@@ -31,20 +32,20 @@ public class Seans  implements java.io.Serializable {
     public void setId(Integer id) {
         this.id = id;
     }
+
     public int getIdFilmu() {
-        return this.idFilmu;
+    return this.idFilmu;
     }
-    
     public void setIdFilmu(int idFilmu) {
-        this.idFilmu = idFilmu;
+    this.idFilmu = idFilmu;
     }
     public int getIdSali() {
-        return this.idSali;
+    return this.idSali;
+    }
+    public void setIdSali(int idSali) {
+    this.idSali = idSali;
     }
     
-    public void setIdSali(int idSali) {
-        this.idSali = idSali;
-    }
     public Date getData() {
         return this.data;
     }

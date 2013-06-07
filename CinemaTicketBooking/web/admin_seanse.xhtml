@@ -2,14 +2,47 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
     <h:head>
         <title>Facelet Title</title>
     </h:head>
     <h:body>
         <ui:composition template="admin_site.xhtml">
             <ui:define name="content">
-                <h2>Seans</h2>
+                <h2>Seanse</h2>
+                <h:dataTable value="#{seansBean.getSeanse()}" var="seans" border="1">
+                    <h:column>
+                        <f:facet name="header">
+                            Nazwa Filmu
+                        </f:facet>
+                        #{seansBean.getFilmName(seans.idFilmu)}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            Numer sali
+                        </f:facet>
+                        #{seansBean.getSalaNumber(seans.idSali)}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            Data i czas
+                        </f:facet>
+                        <h:outputText value="#{seans.data}">
+                            <f:convertDateTime dateStyle="long" timeZone="EST" type="both" />
+                        </h:outputText>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            Opcje
+                        </f:facet>
+                        <h:form>
+                            <h:commandLink value="Usuń" action="#{seansBean.deleteSeans(seans.id)}" /> &nbsp;
+                            <h:commandLink value="Modyfikuj" action="#{seansBean.toModifySeans(seans.id, seans.idFilmu, seans.idSali, seans.data)}" />
+                        </h:form>
+                    </h:column>
+                </h:dataTable>
+                <h:link outcome="admin_add_seans.xhtml" value="Dodaj seans" />
             </ui:define>
         </ui:composition>
     </h:body>

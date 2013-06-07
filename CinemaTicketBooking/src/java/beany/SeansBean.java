@@ -5,9 +5,13 @@
 package beany;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import klasy.Film;
+import klasy.Sala;
 import klasy.Seans;
 import org.hibernate.Session;
 
@@ -36,7 +40,7 @@ public class SeansBean {
         Seans seans = new Seans(idFilmu, idSali, data);
         session.save(seans);        
         session.getTransaction().commit();
-        return "admin_filmy";
+        return "admin_seanse";
     }
     public String deleteSeans(int seansId)
     {
@@ -47,7 +51,7 @@ public class SeansBean {
         session.getTransaction().commit();
         return "admin_filmy";
     }
-    public String toModifySeans(int id, int idFilmu,int idSali,Date data)
+    public String toModifySeans(int id, int idFilmu, int idSali, Date data)
     {
         this.id = id;
         this.idFilmu = idFilmu;
@@ -80,7 +84,50 @@ public class SeansBean {
         session.getTransaction().commit();
         return seanse;
     }
-
+    
+    public String getFilmName(int filmId)
+    {
+        Session session = klasy.HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+        Film film = (Film)session.get(Film.class, filmId);
+        session.getTransaction().commit();
+        return film.getNazwa();
+    }
+    
+    public int getSalaNumber(int salaId)
+    {
+        Session session = klasy.HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+        Sala sala = (Sala)session.get(Sala.class, salaId);
+        session.getTransaction().commit();
+        return sala.getNumer();
+    }
+    public Map<String,Integer> getFilmy()
+    {
+        Map<String,Integer> filmy = new HashMap<String, Integer>();
+        Session session = klasy.HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+        List<Film> filmyList = session.createQuery("from Film").list();
+        session.getTransaction().commit();
+        for(Film film:filmyList)
+        {
+            filmy.put(film.getNazwa(), film.getId());
+        }
+        return filmy;
+    }
+    public Map<Integer,Integer> getSale()
+    {
+        Map<Integer,Integer> sale = new HashMap<Integer, Integer>();
+        Session session = klasy.HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+        List<Sala> saleList = session.createQuery("from Sala").list();
+        session.getTransaction().commit();
+        for(Sala sala:saleList)
+        {
+            sale.put(sala.getNumer(), sala.getId());
+        }
+        return sale;
+    }
     public int getId() {
         return id;
     }
@@ -89,20 +136,18 @@ public class SeansBean {
         this.id = id;
     }
 
+    
     public int getIdFilmu() {
-        return idFilmu;
+    return idFilmu;
     }
-
     public void setIdFilmu(int idFilmu) {
-        this.idFilmu = idFilmu;
+    this.idFilmu = idFilmu;
     }
-
     public int getIdSali() {
-        return idSali;
+    return idSali;
     }
-
     public void setIdSali(int idSali) {
-        this.idSali = idSali;
+    this.idSali = idSali;
     }
 
     public Date getData() {
@@ -112,5 +157,7 @@ public class SeansBean {
     public void setData(Date data) {
         this.data = data;
     }
+    
+    
     
 }
