@@ -4,7 +4,9 @@
  */
 package beany;
 
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,6 +32,7 @@ public class SeansBean {
     private int idFilmu;
     private int idSali;
     private Date data;
+    private String toDate;
     public SeansBean() 
     {
     }
@@ -62,10 +65,8 @@ public class SeansBean {
     }
     public String modifySeans()
     {
-        System.out.println("jest");
         Session session = klasy.HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
-        System.out.println("jest");
         Seans seans = (Seans)session.get(Seans.class, this.id);
         
         seans.setIdFilmu(idFilmu);
@@ -128,6 +129,75 @@ public class SeansBean {
         }
         return sale;
     }
+    public Map<String,Date> getDistinctDate()
+    {
+        Map<String,Date> dates = new HashMap<String, Date>();
+        Session session = klasy.HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+        List<Seans> seanse = session.createQuery("from Seans").list();
+        session.getTransaction().commit();
+        Calendar kal = new GregorianCalendar();
+        
+        for(Seans s:seanse)
+        {
+            kal.setTime(s.getData());
+            String dat = ((Integer)kal.get(Calendar.DATE)).toString() + "." + ((Integer)kal.get(Calendar.MONTH)) + "." + ((Integer)kal.get(Calendar.YEAR));
+            dates.put(dat, s.getData());
+        }
+        
+        return dates;
+    }
+    public List<Film> getSeanseByDate()
+    {
+            
+        List<Seans> seanse;
+        Session session = klasy.HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+        if(data == null)
+        {
+            List<Seans> seanse2 = session.createQuery("from Seans").list();
+            data = seanse2.get(0).getData();
+        }
+       
+        Calendar dat = new GregorianCalendar();
+        dat.setTime(data);
+        Integer month = dat.get(Calendar.MONTH) + 1;
+        String selection = (((Integer)dat.get(Calendar.YEAR) + "." + month + "." + (Integer)dat.get(Calendar.DATE)).toString());
+        String query = "from Seans where DATE(data) = DATE('" + selection + "')";
+        seanse = session.createQuery(query).list();
+        query = "from Film where id in(";
+        for(int i=0;i<seanse.size();++i)
+        {
+            String d = ((Integer)seanse.get(i).getIdFilmu()).toString(); 
+            query += d;
+            if(i != seanse.size() -1)
+                query += ",";
+        }
+        query += ")";
+        List<Film> filmy = session.createQuery(query).list();
+        session.getTransaction().commit();
+        return filmy;
+    }
+    public String getTimeById(int id_filmu)
+    {
+        Session session = klasy.HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+        List<Seans> seanse = session.createQuery("from Seans where id_filmu = " + id_filmu).list();
+        String time = "";
+        for(int i=0;i<seanse.size();++i)
+        {
+            Calendar kal = new GregorianCalendar();
+            kal.setTime(seanse.get(i).getData());
+            
+            int hour = seanse.get(i).getData().getHours() - 7;
+            time += hour + ":" + kal.get(Calendar.MINUTE);
+            if(i != seanse.size() - 1)
+                time += ";    ";
+        }
+        session.getTransaction().commit();
+        return time;
+    }
+    
     public int getId() {
         return id;
     }
@@ -135,7 +205,7 @@ public class SeansBean {
     public void setId(int id) {
         this.id = id;
     }
-
+    
     
     public int getIdFilmu() {
     return idFilmu;
@@ -156,6 +226,14 @@ public class SeansBean {
 
     public void setData(Date data) {
         this.data = data;
+    }
+
+    public String getToDate() {
+        return toDate;
+    }
+
+    public void setToDate(String toDate) {
+        this.toDate = toDate;
     }
     
     

@@ -9,7 +9,7 @@
         <h1>Panel administracyjny</h1>
         <h:form target="admin_site">
                 <h:outputLabel value="Hasło"></h:outputLabel>
-                <h:inputText label="Hasło" value="#{adminLoginBean.inputPass}" ></h:inputText><br />
+                <h:inputSecret label="Hasło" value="#{adminLoginBean.inputPass}" ></h:inputSecret><br />
                 <h:commandButton value="Zaloguj" action="#{adminLoginBean.login}"></h:commandButton>
         </h:form>
     </h:body>

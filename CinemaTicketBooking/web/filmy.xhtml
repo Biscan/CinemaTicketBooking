@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="index.xhtml">
+            <ui:define name="content">
+                <h2>Filmy</h2>
+                <h:form>
+                    <h:outputLabel value="Wybierz datę:" />
+                    <h:selectOneMenu value="#{seansBean.data}">
+                        
+                        <f:selectItems value="#{seansBean.getDistinctDate()}" />            
+                        <f:convertDateTime dateStyle="short" timeZone="EST" type="both">
+                            
+                        </f:convertDateTime>
+                    </h:selectOneMenu>
+                    <h:commandButton value="Wyszukaj seansów" action="filmy" />
+                    <h:dataTable value="#{seansBean.getSeanseByDate()}" var="seans">
+                        <h:column>
+                            <f:facet name="header">
+                                Nazwa filmu
+                            </f:facet>
+                            #{seans.nazwa}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                Godziny seansu
+                            </f:facet>
+                            #{seansBean.getTimeById(seans.id)}
+                        </h:column>
+                    </h:dataTable>
+                </h:form>
+                
+                
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

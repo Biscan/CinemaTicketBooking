@@ -4,11 +4,9 @@
  */
 package beany;
 
-import java.util.ArrayList;
-import java.util.List;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import klasy.Film;
 
 /**
  *
@@ -19,7 +17,6 @@ import klasy.Film;
 public class AdminLoginBean 
 {
     String inputPass;
-    String errMsg;
     boolean isLogged = false;
     /**
      * Creates a new instance of AdminLoginBean
@@ -44,7 +41,12 @@ public class AdminLoginBean
             return "admin_index";
         }
     }
-
+    public String logout()
+    {
+        inputPass = "";
+        isLogged = false;
+        return "admin_index";
+    }
     public String getInputPass() {
         return inputPass;
     }
