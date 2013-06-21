@@ -17,6 +17,9 @@
                 <h:link outcome="admin_filmy">Administruj filmami</h:link><br />
                 <h:link outcome="admin_seanse">Administruj seansami</h:link><br />
                 <h:link outcome="admin_rezerwacje">Administruj rezerwacjami</h:link>
+                <h:form>
+                    <h:commandLink value="Wyloguj" action="#{adminLoginBean.logout()}" />
+                </h:form>
             </div>
             <div class="content">
                 <ui:insert name="content">

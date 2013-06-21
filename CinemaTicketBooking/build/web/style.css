@@ -34,3 +34,7 @@ root
     background-color:yellowgreen;
     min-height: 500px;
 }
+.dataT
+{
+    max-width:50px;
+}
