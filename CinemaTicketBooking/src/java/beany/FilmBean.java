@@ -26,8 +26,8 @@ public class FilmBean {
     private int wiek;
     private int czas;
     private int id;
-    String opis;
-    boolean modifying = false;
+    String opis; 
+   boolean modifying = false;
     
     public FilmBean() 
     {

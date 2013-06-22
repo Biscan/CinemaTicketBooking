@@ -10,8 +10,11 @@ import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import klasy.Film;
 import klasy.Sala;
 import klasy.Seans;
@@ -33,6 +36,9 @@ public class SeansBean {
     private int idSali;
     private Date data;
     private String toDate;
+    
+    private RezerwacjaBean rezerwacjaBean = new RezerwacjaBean();
+    
     public SeansBean() 
     {
     }
@@ -147,6 +153,26 @@ public class SeansBean {
         
         return dates;
     }
+    
+    public Map<String,Date> getDistinctTimeBySeansId(int idFilmu)
+    {
+        Map<String,Date> dates = new HashMap<String, Date>();
+        Session session = klasy.HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+        List<Seans> seanse = session.createQuery("from Seans").list();
+        session.getTransaction().commit();
+        Calendar kal = new GregorianCalendar();
+        
+        for(Seans s:seanse)
+        {
+            kal.setTime(s.getData());
+            String dat = ((Integer)kal.get(Calendar.HOUR)).toString() + ":" + ((Integer)kal.get(Calendar.MINUTE));
+            dates.put(dat, s.getData());
+        }
+        
+        return dates;
+    }
+    
     public List<Film> getSeanseByDate()
     {
             
@@ -236,6 +262,9 @@ public class SeansBean {
         this.toDate = toDate;
     }
     
+    public void rezerwuj(Film f) {
+        rezerwacjaBean.setIdSeansu(this.id);
+    }
     
     
 }

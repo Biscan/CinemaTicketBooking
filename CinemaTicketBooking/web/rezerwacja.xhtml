@@ -10,52 +10,22 @@
     <h:body>
         <ui:composition template="index.xhtml">
             <ui:define name="content">
-                <h2>Filmy</h2>
+                <h2>Rezerwacja - etap 1</h2>
                 <h:form>
-                    <h:outputLabel value="Wybierz datę:" />
-                    <h:selectOneMenu value="#{seansBean.data}">
+                    <h:outputText value="#{filmBean.id}" /> <br />
+                    <h:outputText value="#{seansBean.idFilmu}" /> <h:outputText value="#{rezerwacjaBean.seansBean.idFilmu}" />
+                    <h:outputLabel value="Wybierz godzinę:" />
+                    <h:selectOneMenu value="#{rezerwacjaBean.seansBean.data}">
                         
-                        <f:selectItems value="#{seansBean.getDistinctDate()}" />            
+                        <f:selectItems value="#{seansBean.getDistinctTimeBySeansId(seansBean.idFilmu)}" />            
                         <f:convertDateTime dateStyle="short" timeZone="EST" type="both">
                             
                         </f:convertDateTime>
                     </h:selectOneMenu>
-                    <h:commandButton value="Wyszukaj seansów" action="filmy" />
-                    <h:dataTable value="#{seansBean.getSeanseByDate()}" var="seans">
-                        <h:column>
-                            <f:facet name="header">
-                                Nazwa filmu
-                            </f:facet>
-                            #{seans.nazwa}
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                Kategoria wiekowa
-                            </f:facet>
-                            #{seans.kategoriaWiekowa}
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                Czas trwania
-                            </f:facet>
-                            #{seans.czasTrwania}
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                Godziny seansu
-                            </f:facet>
-                            #{seansBean.getTimeById(seans.id)}
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                Rezerwacja
-                            </f:facet>
-                            <h:link value="Rezerwuj" outcome="rezerwacja.xhtml" />
-                        </h:column>
-                    </h:dataTable>
+                    <h:inputText value="#{rezerwacjaBean.nazwisko}" />
+                    <h:commandButton value="Wyszukaj seansów" action="wybor_sali.xhtml" />
+                    
                 </h:form>
-                
-                
             </ui:define>
         </ui:composition>
     </h:body>
