@@ -37,7 +37,7 @@ public class SeansBean {
     private Date data;
     private String toDate;
     
-    private RezerwacjaBean rezerwacjaBean = new RezerwacjaBean();
+    //private RezerwacjaBean rezerwacjaBean = new RezerwacjaBean();
     
     public SeansBean() 
     {
@@ -262,9 +262,9 @@ public class SeansBean {
         this.toDate = toDate;
     }
     
-    public void rezerwuj(Film f) {
+    /*public void rezerwuj(Film f) {
         rezerwacjaBean.setIdSeansu(this.id);
-    }
+    }*/
     
     
 }

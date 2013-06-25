@@ -30,28 +30,19 @@
                         </h:column>
                         <h:column>
                             <f:facet name="header">
-                                Kategoria wiekowa
-                            </f:facet>
-                            #{seans.kategoriaWiekowa}
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                Czas trwania
-                            </f:facet>
-                            #{seans.czasTrwania}
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
                                 Godziny seansu
                             </f:facet>
                             #{seansBean.getTimeById(seans.id)}
                         </h:column>
+<<<<<<< HEAD
                         <h:column>
                             <f:facet name="header">
                                 Rezerwacja
                             </f:facet>
-                            <h:link value="Rezerwuj" outcome="rezerwacja.xhtml" />
+                            <h:link value="Rezerwuj" outcome="#{seansBean.rezerwuj(seans)}" />
                         </h:column>
+=======
+>>>>>>> parent of 8e35a82... Wyswietlanie reszty danych w filmie
                     </h:dataTable>
                 </h:form>
                 

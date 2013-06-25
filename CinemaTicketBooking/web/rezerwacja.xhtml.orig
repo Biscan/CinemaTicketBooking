@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="index.xhtml">
+            <ui:define name="content">
+                <h2>Rezerwacja - etap 1</h2>
+                <h:form>
+                    <h:outputText value="#{filmBean.id}" /> <br />
+                    <h:outputText value="#{seansBean.idFilmu}" /> <h:outputText value="#{rezerwacjaBean.seansBean.idFilmu}" />
+                    <h:outputLabel value="Wybierz godzinę:" />
+                    <h:selectOneMenu value="#{rezerwacjaBean.seansBean.data}">
+                        
+                        <f:selectItems value="#{seansBean.getDistinctTimeBySeansId(seansBean.idFilmu)}" />            
+                        <f:convertDateTime dateStyle="short" timeZone="EST" type="both">
+                            
+                        </f:convertDateTime>
+                    </h:selectOneMenu>
+                    <h:inputText value="#{rezerwacjaBean.nazwisko}" />
+                    <h:commandButton value="Wyszukaj seansów" action="wybor_sali.xhtml" />
+                    
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+
