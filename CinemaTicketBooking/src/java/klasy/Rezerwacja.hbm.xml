@@ -1,16 +1,16 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2013-05-31 18:05:34 by Hibernate Tools 3.2.1.GA -->
-<hibernate-mapping>
+<!-- Generated Jun 22, 2013 10:14:46 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping default-lazy="false">
     <class name="klasy.Rezerwacja" table="rezerwacja" catalog="matepod">
         <id name="id" type="java.lang.Integer">
             <column name="id" />
             <generator class="identity" />
         </id>
-        <property name="idSeansu" type="int">
+        <many-to-one name="seans" class="klasy.Seans" fetch="select">
             <column name="id_seansu" not-null="true" />
-        </property>
+        </many-to-one>
         <property name="rzad" type="int">
             <column name="rzad" not-null="true" />
         </property>

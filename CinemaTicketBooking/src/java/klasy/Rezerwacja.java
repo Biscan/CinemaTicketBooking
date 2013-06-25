@@ -1,5 +1,5 @@
 package klasy;
-// Generated 2013-05-31 18:05:26 by Hibernate Tools 3.2.1.GA
+// Generated Jun 22, 2013 10:14:45 PM by Hibernate Tools 3.2.1.GA
 
 
 
@@ -10,7 +10,7 @@ public class Rezerwacja  implements java.io.Serializable {
 
 
      private Integer id;
-     private int idSeansu;
+     private Seans seans;
      private int rzad;
      private int nrSiedzenia;
      private String nazwisko;
@@ -20,14 +20,14 @@ public class Rezerwacja  implements java.io.Serializable {
     }
 
 	
-    public Rezerwacja(int idSeansu, int rzad, int nrSiedzenia, String nazwisko) {
-        this.idSeansu = idSeansu;
+    public Rezerwacja(Seans seans, int rzad, int nrSiedzenia, String nazwisko) {
+        this.seans = seans;
         this.rzad = rzad;
         this.nrSiedzenia = nrSiedzenia;
         this.nazwisko = nazwisko;
     }
-    public Rezerwacja(int idSeansu, int rzad, int nrSiedzenia, String nazwisko, Boolean zatwierdzona) {
-       this.idSeansu = idSeansu;
+    public Rezerwacja(Seans seans, int rzad, int nrSiedzenia, String nazwisko, Boolean zatwierdzona) {
+       this.seans = seans;
        this.rzad = rzad;
        this.nrSiedzenia = nrSiedzenia;
        this.nazwisko = nazwisko;
@@ -41,12 +41,12 @@ public class Rezerwacja  implements java.io.Serializable {
     public void setId(Integer id) {
         this.id = id;
     }
-    public int getIdSeansu() {
-        return this.idSeansu;
+    public Seans getSeans() {
+        return this.seans;
     }
     
-    public void setIdSeansu(int idSeansu) {
-        this.idSeansu = idSeansu;
+    public void setSeans(Seans seans) {
+        this.seans = seans;
     }
     public int getRzad() {
         return this.rzad;

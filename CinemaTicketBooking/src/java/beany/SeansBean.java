@@ -204,6 +204,30 @@ public class SeansBean {
         session.getTransaction().commit();
         return filmy;
     }
+    
+    /*public List<Seans> getSeanseByDate()
+    {
+            
+        List<Seans> seanse;
+        Session session = klasy.HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+        if(data == null)
+        {
+            List<Seans> seanse2 = session.createQuery("from Seans").list();
+            data = seanse2.get(0).getData();
+        }
+       
+        Calendar dat = new GregorianCalendar();
+        dat.setTime(data);
+        Integer month = dat.get(Calendar.MONTH) + 1;
+        String selection = (((Integer)dat.get(Calendar.YEAR) + "." + month + "." + (Integer)dat.get(Calendar.DATE)).toString());
+        String query = "from Seans where DATE(data) = DATE('" + selection + "')";
+        seanse = session.createQuery(query).list();
+        
+        session.getTransaction().commit();
+        return seanse;
+    }*/
+    
     public String getTimeById(int id_filmu)
     {
         Session session = klasy.HibernateUtil.getSessionFactory().getCurrentSession();

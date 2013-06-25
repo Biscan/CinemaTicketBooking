@@ -22,7 +22,7 @@ public class RezerwacjaBean {
     private int nrSiedzenia;
     private String nazwisko;
     private Boolean zatwierdzona;
-    private SeansBean seansBean = new SeansBean();
+    //private SeansBean seansBean = new SeansBean();
      
     /**
      * Creates a new instance of RezerwacjaBean
@@ -73,12 +73,12 @@ public class RezerwacjaBean {
         this.zatwierdzona = zatwierdzona;
     }
     
-    public SeansBean getSeansBean() {
+   /* public SeansBean getSeansBean() {
         return this.seansBean;
     }
     
     public void setSeansBean(SeansBean seansBean) {
         this.seansBean = seansBean;
-    }
+    }*/
     
 }
