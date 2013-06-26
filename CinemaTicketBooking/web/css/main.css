@@ -112,6 +112,10 @@ img {
     padding: 7px 9px;
 }
 
+.form-signin input[type="submit"]{
+    margin-right: 95px;
+}
+
 .container.admin-login {
     width: 350px;
 }
