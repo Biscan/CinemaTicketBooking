@@ -10,39 +10,36 @@
         <link href="./resources/css/default.css" rel="stylesheet" type="text/css" />
         <link href="./resources/css/cssLayout.css" rel="stylesheet" type="text/css" />
         -->
-        <title>Kino Iluzja</title>
+        <title>Kino Iluzja - Panel administracyjny</title>
         <link rel="stylesheet" href="css/main.css" />
         <link href="css/bootstrap.min.css" rel="stylesheet" media="screen" />
         <script src="http://code.jquery.com/jquery.js"></script>
         <script src="js/bootstrap.min.js"></script>
-        <link rel="stylesheet" href="css/lightbox.css" type="text/css" media="screen" />
-        <script src="js/jquery-1.7.2.min.js"></script>
-        <script src="js/jquery-ui-1.8.18.custom.min.js"></script>
-        <script src="js/jquery.smooth-scroll.min.js"></script>
-        <script src="js/lightbox.js"></script>
         <link href='http://fonts.googleapis.com/css?family=Fredoka+One|Open+Sans:400,700' rel='stylesheet' type='text/css' />
     </h:head>
 
-    <h:body>
-        <div class="container">
+    <h:body rendered="#{adminLoginBean.isLogged}">
+        <div class="container admin">
             <div class="row header">
                 <div class="span12">
                     <ui:insert name="top">
                         <h1><h:link outcome="index"><h:graphicImage url="img/logo.jpg" alt="logo" class="logo"/></h:link>
-                            Kino Iluzja</h1>
+                            Kino Iluzja - Panel administracyjny</h1>
                     </ui:insert>
                 </div>
             </div>
             <div class="row">
                 <div class="span4 menu">
-                    <ui:insert name="left">
-                        <h3>Menu</h3>
-                        <ul>
-                            <li><h:link value="Strona Główna" outcome="index.xhtml" /></li>
-                            <li><h:link value="Przegladaj filmy" outcome="filmy.xhtml" /></li>
-                        </ul>
-                        <h:graphicImage value="img/cards-fall.jpg" class="cards-fall-img"/>
-                    </ui:insert>
+                    <h3>Menu</h3>
+                    <ul>
+                        <li><h:link outcome="admin_sale">Administruj salami</h:link></li>
+                    <li><h:link outcome="admin_filmy">Administruj filmami</h:link></li>
+                    <li><h:link outcome="admin_seanse">Administruj seansami</h:link></li>
+                    <li><h:link outcome="admin_rezerwacje">Administruj rezerwacjami</h:link></li>
+                    <li><h:form>
+                        <h:commandLink value="Wyloguj" action="#{adminLoginBean.logout()}" />
+                    </h:form></li>
+                    </ul>
                 </div>
                 <div class="span8 content">
                     <ui:insert name="content">
@@ -50,16 +47,12 @@
                     </ui:insert>
                 </div>
             </div>
-            <div class="row footer">
-                <div class="span12">
-                    <ui:insert name="bottom">
-                        <h:link outcome="admin_index"><h:graphicImage url="img/admin.jpg" alt="panel administracyjny" class="admin-link-img"/></h:link>
-                        <strong>Twórcy: Mateusz Podsiadły, Michał Klabisz</strong>
-                    </ui:insert>
-                </div>
-            </div>
         </div>
 
     </h:body>
-
+    <h:body rendered="#{!adminLoginBean.isLogged}">
+        <div class="alert alert-error">
+            <h1>Nie posiadasz uprawnień!</h1>
+        </div>
+    </h:body>
 </html>

@@ -29,6 +29,7 @@ body{
 
 .admin-link-img {
     width: 120px;
+    margin-left: 40px;
 }
 
 .logo {
@@ -46,6 +47,11 @@ img {
     font-size: 50px;
     letter-spacing: 0.1em;
     text-transform: uppercase;
+}
+
+.admin .header h1 {
+    font-family: "Fredoka One","lucida grande",tahoma,sans-serif;
+    font-size: 33px;
 }
 
 .menu h3 {
@@ -113,4 +119,8 @@ img {
 .container.admin-login h3{
     font-family: "Fredoka One","lucida grande",tahoma,sans-serif;
     width: 350px;
+}
+
+.cards-fall-img {
+    width:200px;
 }
