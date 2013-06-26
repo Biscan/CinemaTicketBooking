@@ -5,30 +5,38 @@
       xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:head>
         <title>Kino Iluzja</title>
-        <link rel="stylesheet" href="style.css" />
+        <link rel="stylesheet" href="css/main.css" />
+        <link href="css/bootstrap.min.css" rel="stylesheet" media="screen" />
+        <script src="http://code.jquery.com/jquery.js"></script>
+        <script src="js/bootstrap.min.js"></script>
     </h:head>
     <h:body>
-        <div class="main">
-            <div class="top_banner">
-                <h1>Kino Iluzja</h1>
+
+
+        <div class="container">
+            <div class="row">
+                <div class="span12">
+                    <h1>Kino Iluzja</h1>
+                </div>
             </div>
-            <div class="menu">
-                
+            <div class="row">
+                <div class="span2">
                     <h3>Menu</h3>
                     <ul>
                         <li><h:link value="Strona Główna" outcome="index.xhtml" /></li>
                         <li><h:link value="Przeglądaj filmy" outcome="filmy.xhtml" /></li>
                     </ul>
-            </div>
-            <div class="content">
-                <ui:insert name="content">
-                    <h2>Strona Główna</h2>
-                </ui:insert>
+                </div>
+                <div class="span5">
+                    <ui:insert name="content">
+                        <h2>Witamy w kinie Iluzja!</h2>
+                    </ui:insert>
+                    <h:link outcome="admin_index"><h:graphicImage url="img/admin.jpg" alt="panel administracyjny" /></h:link>
+                </div>
             </div>
         </div>
     </h:body>
-    <h3>Hasło: "admin" </h3>
-    <h:link outcome="admin_index">Admin</h:link>
-    
+
+
 </html>
 
