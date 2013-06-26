@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <!--
+        <link href="./resources/css/default.css" rel="stylesheet" type="text/css" />
+        <link href="./resources/css/cssLayout.css" rel="stylesheet" type="text/css" />
+        -->
+        <title>Kino Iluzja</title>
+        <link rel="stylesheet" href="css/main.css" />
+        <link href="css/bootstrap.min.css" rel="stylesheet" media="screen" />
+        <script src="http://code.jquery.com/jquery.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="css/lightbox.css" type="text/css" media="screen" />
+        <script src="js/jquery-1.7.2.min.js"></script>
+        <script src="js/jquery-ui-1.8.18.custom.min.js"></script>
+        <script src="js/jquery.smooth-scroll.min.js"></script>
+        <script src="js/lightbox.js"></script>
+        <link href='http://fonts.googleapis.com/css?family=Fredoka+One|Open+Sans:400,700' rel='stylesheet' type='text/css' />
+    </h:head>
+
+    <h:body>
+        <div class="container">
+            <div class="row header">
+                <div class="span12">
+                    <ui:insert name="top">
+                        <h1><h:graphicImage url="img/logo.jpg" alt="logo" class="logo"/>
+                            Kino Iluzja</h1>
+                    </ui:insert>
+                </div>
+            </div>
+            <div class="row">
+                <div class="span4 menu">
+                    <ui:insert name="left">
+                        <h3>Menu</h3>
+                        <ul>
+                            <li><h:link value="Strona Główna" outcome="index.xhtml" /></li>
+                            <li><h:link value="Przeglądaj filmy" outcome="filmy.xhtml" /></li>
+                        </ul>
+                    </ui:insert>
+                </div>
+                <div class="span8 content">
+                    <ui:insert name="content">
+
+                    </ui:insert>
+                </div>
+            </div>
+            <div class="row footer">
+                <div class="span12">
+                    <ui:insert name="bottom">
+                        <h:link outcome="admin_index"><h:graphicImage url="img/admin.jpg" alt="panel administracyjny" class="admin-link-img"/></h:link>
+                        Twórcy: Mateusz Podsiadły, Michał Klabisz
+                    </ui:insert>
+                </div>
+            </div>
+        </div>
+
+    </h:body>
+
+</html>

@@ -1,42 +1,15 @@
 <?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
-    <h:head>
-        <title>Kino Iluzja</title>
-        <link rel="stylesheet" href="css/main.css" />
-        <link href="css/bootstrap.min.css" rel="stylesheet" media="screen" />
-        <script src="http://code.jquery.com/jquery.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-    </h:head>
-    <h:body>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./template.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns="http://www.w3.org/1999/xhtml">
 
+    <ui:define name="content">
+        <h2>Witamy w kinie Iluzja!</h2>
+        <p>Zawsze znajdziesz tutaj najnowszy repertuar i zarezerwujesz miejsce na magiczny seans. ;)</p>
+        <h:outputLink value="img/kino1.jpg" rel="lightbox[kino]"><h:graphicImage url="img/kino1thumb.jpg" alt="sale kinowe"/></h:outputLink>
+        <h:outputLink value="img/kino3.jpg" rel="lightbox[kino]"><h:graphicImage url="img/kino3thumb.jpg" alt="sale kinowe"/></h:outputLink>
+    </ui:define>
 
-        <div class="container">
-            <div class="row">
-                <div class="span12">
-                    <h1>Kino Iluzja</h1>
-                </div>
-            </div>
-            <div class="row">
-                <div class="span2">
-                    <h3>Menu</h3>
-                    <ul>
-                        <li><h:link value="Strona Główna" outcome="index.xhtml" /></li>
-                        <li><h:link value="Przeglądaj filmy" outcome="filmy.xhtml" /></li>
-                    </ul>
-                </div>
-                <div class="span5">
-                    <ui:insert name="content">
-                        <h2>Witamy w kinie Iluzja!</h2>
-                    </ui:insert>
-                    <h:link outcome="admin_index"><h:graphicImage url="img/admin.jpg" alt="panel administracyjny" /></h:link>
-                </div>
-            </div>
-        </div>
-    </h:body>
-
-
-</html>
-
+</ui:composition>
