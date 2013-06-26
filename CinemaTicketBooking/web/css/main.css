@@ -39,3 +39,40 @@ body{
 img {
     margin: 4px;
 }
+
+.header h1 {
+    color: #C85555;
+    font-family: "Fredoka One","lucida grande",tahoma,sans-serif;
+    font-size: 50px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.menu h3 {
+    font-family: "Fredoka One","lucida grande",tahoma,sans-serif;
+    color: #398716;
+}
+
+.menu a:link,
+.menu a:visited,
+.menu a:hover,
+.menu a:active {
+    font-family: "Fredoka One","lucida grande",tahoma,sans-serif;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 20px;
+    display:block;
+    color: #C85555;
+}
+
+.menu a:link {color:#FF0000;}      /* unvisited link */
+.menu a:visited {color:#006633;}  /* visited link */
+.menu a:hover {color:#FFFFFF; background-color: #C85555;;}  /* mouse over link */
+.menu a:active {color:#cc3300;}  /* selected link */ 
+
+.menu ul {
+    display: block;
+}
+.menu li {
+    list-style: none;
+}
