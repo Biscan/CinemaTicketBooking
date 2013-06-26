@@ -3,15 +3,22 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html">
     <h:head>
-        <title>Admin Site</title>
+        <title>Kino Iluzja - Panel administracyjny</title>
+        <link rel="stylesheet" href="css/main.css" />
+        <link href="css/bootstrap.min.css" rel="stylesheet" media="screen" />
+        <script src="http://code.jquery.com/jquery.js"></script>
+        <script src="js/bootstrap.min.js"></script>
     </h:head>
     <h:body>
-        <h1>Panel administracyjny</h1>
-        <h:form target="admin_site">
+        <div class="container admin-login">
+            <h2>Panel administracyjny</h2>
+            <h:form target="admin_site" class="form-signin">
                 <h:outputLabel value="Hasło"></h:outputLabel>
-                <h:inputSecret label="Hasło" value="#{adminLoginBean.inputPass}" ></h:inputSecret><br />
-                <h:commandButton value="Zaloguj" action="#{adminLoginBean.login}"></h:commandButton>
-        </h:form>
+                <h:inputSecret label="Hasło" value="#{adminLoginBean.inputPass}" class="input-block-level"></h:inputSecret><br />
+                <h:commandButton value="Zaloguj" action="#{adminLoginBean.login}" class="btn btn-large btn-info"></h:commandButton>
+            </h:form>
+        </div>
+
     </h:body>
 </html>
 

@@ -28,7 +28,7 @@ body{
 }
 
 .admin-link-img {
-     width: 120px;
+    width: 120px;
 }
 
 .logo {
@@ -67,12 +67,50 @@ img {
 
 .menu a:link {color:#FF0000;}      /* unvisited link */
 .menu a:visited {color:#006633;}  /* visited link */
-.menu a:hover {color:#FFFFFF; background-color: #C85555;;}  /* mouse over link */
-.menu a:active {color:#cc3300;}  /* selected link */ 
+.menu a:hover {color:#FFFFFF; background-color: #C85555;}  /* mouse over link */
+.menu a:active {color:#006633;}  /* selected link */ 
 
 .menu ul {
     display: block;
 }
 .menu li {
     list-style: none;
+}
+
+.footer strong {
+    font-size: 17px;
+}
+
+.form-signin {
+    max-width: 300px;
+    padding: 19px 29px 29px;
+    margin: 0 auto 20px;
+    background-color: #fff;
+    border: 1px solid #e5e5e5;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+    -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+    box-shadow: 0 1px 2px rgba(0,0,0,.05);
+}
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+    margin-bottom: 10px;
+}
+.form-signin input[type="text"],
+.form-signin input[type="password"] {
+    font-size: 16px;
+    height: auto;
+    margin-bottom: 15px;
+    padding: 7px 9px;
+}
+
+.container.admin-login {
+    width: 350px;
+}
+
+.container.admin-login h3{
+    font-family: "Fredoka One","lucida grande",tahoma,sans-serif;
+    width: 350px;
 }
