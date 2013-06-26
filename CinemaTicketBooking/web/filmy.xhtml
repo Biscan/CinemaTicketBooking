@@ -20,8 +20,8 @@
                             
                         </f:convertDateTime>
                     </h:selectOneMenu>
-                    <h:commandButton value="Wyszukaj seanse" action="filmy" />
-                    <h:dataTable value="#{seansBean.getSeanseByDate()}" var="seans">
+                    <h:commandButton value="Wyszukaj seanse" action="filmy" class="btn"/>
+                    <h:dataTable value="#{seansBean.getSeanseByDate()}" var="seans" class="table table-striped">
                         <h:column>
                             <f:facet name="header">
                                 Nazwa filmu
@@ -50,7 +50,7 @@
                             <f:facet name="header">
                                 Rezerwacja
                             </f:facet>
-                            <h:link value="Rezerwuj" outcome="rezerwacja.xhtml" />
+                            <h:link value="Rezerwuj" outcome="rezerwacja.xhtml" class="btn btn-small btn-success"/>
                         </h:column>
                     </h:dataTable>
                 </h:form>
