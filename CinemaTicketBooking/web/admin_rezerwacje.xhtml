@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
     <h:head>
         <title>Rezerwacje</title>
     </h:head>
@@ -11,7 +12,48 @@
             <ui:define name="content">
                 <h2>Rezerwacje</h2>
                 <h:form>
-                    
+                    <h:dataTable value="#{rezerwacjaBean.getRezerwacje()}" var="rezerwacja" border="1" class="table table-striped">
+                        <h:column>
+                            <f:facet name="header">
+                                id seansu
+                            </f:facet>
+                            #{rezerwacja.idSeansu}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                               Nazwisko
+                            </f:facet>
+                            #{rezerwacja.nazwisko}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                Nr rzędu
+                            </f:facet>
+                            #{rezerwacja.rzad}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                Nr siedzenia
+                            </f:facet>
+                            #{rezerwacja.nrSiedzenia}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                Zatwierdzono
+                            </f:facet>
+                            #{rezerwacja.zatwierdzona}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                Opcje
+                            </f:facet>
+                            <h:form>
+                                <h:commandButton value="Usuń" action="#{rezerwacjaBean.deleteRezerwacja(rezerwacja.id)}" class="btn btn-small btn-danger" />
+                                &nbsp;
+                                <h:commandButton value="Zmień status" action="#{rezerwacjaBean.zatwierdz(rezerwacja.id)}" class="btn btn-small btn-warning" />
+                            </h:form>
+                        </h:column>
+                    </h:dataTable>
                 </h:form>
             </ui:define>
         </ui:composition>

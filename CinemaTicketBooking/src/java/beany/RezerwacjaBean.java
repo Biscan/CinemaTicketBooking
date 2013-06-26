@@ -4,9 +4,11 @@
  */
 package beany;
 
+import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.faces.bean.ViewScoped;
+import klasy.Rezerwacja;
+import org.hibernate.Session;
 
 /**
  *
@@ -27,7 +29,56 @@ public class RezerwacjaBean {
     /**
      * Creates a new instance of RezerwacjaBean
      */
+    
+    
+    
     public RezerwacjaBean() {
+    }
+    
+    public List<Rezerwacja> getRezerwacje()
+    {
+        Session session = klasy.HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+        List<Rezerwacja> rezerwacje = session.createQuery("from Rezerwacja").list();
+        session.getTransaction().commit();
+        return rezerwacje;
+    }
+    
+    public String addRezerwacja()
+    {
+        Session session = klasy.HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+        
+        Rezerwacja rez = new Rezerwacja(idSeansu, rzad, nrSiedzenia, nazwisko, false);
+        session.save(rez);
+        
+        session.getTransaction().commit();
+        return "rezerwacje";
+        //return "admin_rezerwacje";
+    }
+    public String deleteRezerwacja(int id)
+    {
+        Session session = klasy.HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+        
+        Rezerwacja rez = (Rezerwacja)session.get(Rezerwacja.class,id);
+        session.delete(rez);
+        
+        session.getTransaction().commit();
+        return "admin_rezerwacje";
+    }
+    
+    public String zatwierdz(int id)
+    {
+        Session session = klasy.HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+        
+        Rezerwacja rez = (Rezerwacja)session.get(Rezerwacja.class,id);
+        rez.setZatwierdzona(!rez.getZatwierdzona());
+        session.update(rez);
+        
+        session.getTransaction().commit();
+        return "admin_rezerwacje";
     }
     
     public Integer getId() {
