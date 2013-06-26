@@ -47,8 +47,14 @@ public class SeansBean {
         Session session = klasy.HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
         Seans seans = new Seans(idFilmu, idSali, data);
-        session.save(seans);        
-        session.getTransaction().commit();
+        try{
+            session.save(seans);        
+            session.getTransaction().commit();
+        }
+        catch(Exception ex)
+        {
+            session.getTransaction().rollback();
+        }
         return "admin_seanse";
     }
     public String deleteSeans(int seansId)
@@ -58,7 +64,7 @@ public class SeansBean {
         Seans seans = (Seans)session.get(Seans.class, seansId);
         session.delete(seans);
         session.getTransaction().commit();
-        return "admin_filmy";
+        return "admin_seanse";
     }
     public String toModifySeans(int id, int idFilmu, int idSali, Date data)
     {

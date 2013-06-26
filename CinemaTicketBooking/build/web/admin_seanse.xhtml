@@ -1,17 +1,15 @@
 <?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://java.sun.com/jsf/core">
-    <h:head>
-        <title>Facelet Title</title>
-    </h:head>
-    <h:body>
-        <ui:composition template="admin_site.xhtml">
-            <ui:define name="content">
-                <h2>Seanse</h2>
-                <h:dataTable value="#{seansBean.getSeanse()}" var="seans" border="1">
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./template_admin.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:define name="content">
+        <h2>Seanse</h2>
+                <h:dataTable value="#{seansBean.getSeanse()}" var="seans" border="1" class="table table-striped">
                     <h:column>
                         <f:facet name="header">
                             Nazwa Filmu
@@ -37,14 +35,12 @@
                             Opcje
                         </f:facet>
                         <h:form>
-                            <h:commandLink value="Usuń" action="#{seansBean.deleteSeans(seans.id)}" /> &nbsp;
-                            <h:commandLink value="Modyfikuj" action="#{seansBean.toModifySeans(seans.id, seans.idFilmu, seans.idSali, seans.data)}" />
+                            <h:commandLink value="Usuń" action="#{seansBean.deleteSeans(seans.id)}" class="btn btn-small btn-danger"/> &nbsp;
+                            <h:commandLink value="Modyfikuj" action="#{seansBean.toModifySeans(seans.id, seans.idFilmu, seans.idSali, seans.data)}" class="btn btn-small btn-warning"/>
                         </h:form>
                     </h:column>
                 </h:dataTable>
-                <h:link outcome="admin_add_seans.xhtml" value="Dodaj seans" />
-            </ui:define>
-        </ui:composition>
-    </h:body>
-</html>
+                <h:link outcome="admin_add_seans.xhtml" value="Dodaj seans" class="btn btn-success"/>
+    </ui:define>
 
+</ui:composition>

@@ -1,35 +1,17 @@
 <?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
-    <h:head>
-        <title>Facelet Title</title>
-        <link rel="stylesheet" href="style.css" />
-    </h:head>
-    <h:body rendered="#{adminLoginBean.isLogged}">
-        <div class="main">
-            <div class="top_banner">
-                <h1>Panel administracyjny</h1>
-            </div>
-            <div class="menu">
-                <h:link outcome="admin_sale">Administruj salami</h:link><br />
-                <h:link outcome="admin_filmy">Administruj filmami</h:link><br />
-                <h:link outcome="admin_seanse">Administruj seansami</h:link><br />
-                <h:link outcome="admin_rezerwacje">Administruj rezerwacjami</h:link>
-                <h:form>
-                    <h:commandLink value="Wyloguj" action="#{adminLoginBean.logout()}" />
-                </h:form>
-            </div>
-            <div class="content">
-                <ui:insert name="content">
-                    <h1>Zalogowano poprawnie</h1>        
-                </ui:insert>            
-            </div>
-        </div>
-    </h:body>
-    <h:body rendered="#{!adminLoginBean.isLogged}">
-        <h1>Nie posiadasz uprawnień!</h1>
-    </h:body>
-</html>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./template_admin.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns="http://www.w3.org/1999/xhtml">
+
+    <ui:define name="content">
+        <div class="alert alert-success">
+            <a href="#" class="close" data-dismiss="alert">&times;</a>
+            Zalogowano poprawnie. Po lewej stronie znajdują się kategorie którymi można zarządzać.
+        </div>
+        <h:graphicImage value="img/admin_site.jpg" alt="welcome to admin site" />
+    </ui:define>
+
+</ui:composition>

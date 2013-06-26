@@ -10,7 +10,7 @@
     <h:body>
         <ui:composition template="admin_site.xhtml">
             <ui:define name="content">
-                <h2>Dodaj Film</h2>
+                <h2>Dodaj Seans</h2>
                 <h:form id="form">
                     <h:panelGrid columns="3">
                         <h:outputLabel value="Film" />
@@ -24,7 +24,7 @@
                         </h:selectOneMenu>
                         <h:message for="sala" />
                         <h:outputLabel value="Data i godzina" />
-                        <h:inputText id="data" value="#{seansBean.data}">
+                        <h:inputText id="data" value="#{seansBean.data}" required="true">
                             <f:convertDateTime dateStyle="short" timeZone="EST" type="both" />
                         </h:inputText> 
                         <h:message for="data" />

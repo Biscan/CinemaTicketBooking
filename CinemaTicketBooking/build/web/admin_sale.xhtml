@@ -1,17 +1,15 @@
 <?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://java.sun.com/jsf/core">
-    <h:head>
-        <title>Facelet Title</title>
-    </h:head>
-    <h:body>
-        <ui:composition template="admin_site.xhtml">
-            <ui:define name="content">
-                <h2>Sale</h2>
-                <h:dataTable border="1" value="#{salaBean.getSale()}" var="sala">
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./template_admin.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:define name="content">
+        <h2>Sale</h2>
+                <h:dataTable border="1" value="#{salaBean.getSale()}" var="sala" class="table table-striped">
                     <h:column>
                         <f:facet name="header">
                             Ilość rzędów
@@ -35,14 +33,11 @@
                             Opcje
                         </f:facet>
                         <h:form>
-                            <h:commandLink value="modyfikuj" action="#{salaBean.toModifySala(sala.id, sala.wysokosc, sala.szerokosc, sala.numer)}" /> &nbsp; 
-                            <h:commandLink action="#{salaBean.deleteSala(sala.id)}" value="Usuń"  />
+                            <h:commandLink value="modyfikuj" action="#{salaBean.toModifySala(sala.id, sala.wysokosc, sala.szerokosc, sala.numer)}" class="btn btn-small btn-warning"/> &nbsp; 
+                            <h:commandLink action="#{salaBean.deleteSala(sala.id)}" value="Usuń"  class="btn btn-small btn-danger"/>
                         </h:form>
                     </h:column>
               </h:dataTable>
-                <h:link outcome="admin_add_sala.xhtml" value="Dodaj salę" />
-            </ui:define>
-        </ui:composition>
-    </h:body>
-</html>
-
+                <h:link outcome="admin_add_sala.xhtml" value="Dodaj salę" class="btn btn-success"/>
+    </ui:define>
+</ui:composition>
