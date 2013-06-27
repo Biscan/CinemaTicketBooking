@@ -242,7 +242,13 @@ public class SeansBean {
     {
         Session session = klasy.HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
-        List<Seans> seanse = session.createQuery("from Seans where id_filmu = " + id_filmu).list();
+        List<Seans> seanse;
+        if (this.data != null) {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            seanse = session.createQuery("from Seans s where s.idFilmu = " + id_filmu + " and DATE(s.data) = '" + dateFormat.format(this.data) + "'").list();
+        } else {
+            seanse = session.createQuery("from Seans where id_filmu = " + id_filmu).list();
+        }
         String time = "";
         for(int i=0;i<seanse.size();++i)
         {
