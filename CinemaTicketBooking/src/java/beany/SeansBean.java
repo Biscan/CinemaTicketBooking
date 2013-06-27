@@ -16,6 +16,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import klasy.Film;
+import klasy.HibernateUtil;
 import klasy.Sala;
 import klasy.Seans;
 import org.hibernate.Session;
@@ -34,6 +35,7 @@ public class SeansBean {
     private int id;
     private int idFilmu;
     private int idSali;
+    private int idSeansu;
     private Date data;
     private String toDate;
     
@@ -221,6 +223,20 @@ public class SeansBean {
         session.getTransaction().commit();
         return filmy;
     }
+    
+    public Seans getSeansByDate() {
+        List<Seans> seanse;
+        if (this.data == null)
+            seanse = HibernateUtil.executeHQLQuery("from Seans s where s.idFilmu = " + this.idFilmu); 
+        else {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd kk:mm");
+            String t  = dateFormat.format(this.data);
+            seanse = HibernateUtil.executeHQLQuery("from Seans s where s.idFilmu = " + this.idFilmu + " and s.data like '" + dateFormat.format(this.data) + "%'"); 
+            //seanse = HibernateUtil.executeHQLQuery("from Seans s where s.idFilmu = " + this.idFilmu + " and s.data = '" + this.data + "'"); 
+        }
+        return seanse.get(0);
+    }
+    
     public String getTimeById(int id_filmu)
     {
         Session session = klasy.HibernateUtil.getSessionFactory().getCurrentSession();
@@ -291,9 +307,27 @@ public class SeansBean {
     
     public String rezerwuj(Film f) {
         System.out.println(f.getId());
+        this.idFilmu = f.getId();
         this.rezerwacjaBean.setIdFilmu(f.getId());
         this.rezerwacjaBean.setFilm(f);
+        this.rezerwacjaBean.setZatwierdzona(Boolean.FALSE);
         return "rezerwacja";
+    }
+    
+    public String rezerwujSale() {
+        Seans s = this.getSeansByDate();
+        this.idSeansu = s.getId();
+        this.rezerwacjaBean.setIdSeansu(this.idSeansu);
+        this.rezerwacjaBean.setSeans(s);
+        return "wybor_miejsca";
+    }
+
+    public int getIdSeansu() {
+        return idSeansu;
+    }
+
+    public void setIdSeansu(int idSeansu) {
+        this.idSeansu = idSeansu;
     }
     
     

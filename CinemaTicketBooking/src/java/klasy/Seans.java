@@ -18,6 +18,8 @@ public class Seans  implements java.io.Serializable {
      @Column
      @Type(type="date")
      private Date data;
+     private Film film;
+     private Sala sala;
      
     public Seans() {
     }
@@ -35,6 +37,14 @@ public class Seans  implements java.io.Serializable {
     
     public void setId(Integer id) {
         this.id = id;
+    }
+    
+    public Film getFilm() {
+        return this.film;
+    }
+    
+    public void setFilm(Film film) {
+        this.film = film;
     }
 
     public int getIdFilmu() {
@@ -56,6 +66,14 @@ public class Seans  implements java.io.Serializable {
     
     public void setData(Date data) {
         this.data = data;
+    }
+
+    public Sala getSala() {
+        return sala;
+    }
+
+    public void setSala(Sala sala) {
+        this.sala = sala;
     }
 
 }

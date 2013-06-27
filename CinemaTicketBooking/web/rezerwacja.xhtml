@@ -10,19 +10,28 @@
     <h:body>
         <ui:composition template="index.xhtml">
             <ui:define name="content">
-                <h2>Rezerwacja na seans "#{rezerwacjaBean.film.nazwa}" - etap 1</h2>
+                <h2>Rezerwacja na seans "#{rezerwacjaBean.film.nazwa}"</h2>
                 <h:form>
-                    <h:outputLabel value="Wybierz godzinę:" />
-                    <h:selectOneMenu value="#{seansBean.data}">
-                        
-                        <f:selectItems value="#{seansBean.getDistinctTimeBySeansId(rezerwacjaBean.film.id)}" />            
-                        <f:convertDateTime dateStyle="short" timeZone="EST" type="both">
-                            
-                        </f:convertDateTime>
-                    </h:selectOneMenu>
-                    <h:inputText value="#{rezerwacjaBean.nazwisko}" />
-                    <h:commandButton value="Dalej" action="wybor_sali.xhtml" class="btn btn-info"/>
-                    
+                    <div>
+                        <h:outputLabel value="Wybierz godzinę:" />
+                        <h:selectOneMenu value="#{seansBean.data}">
+
+                            <f:selectItems value="#{seansBean.getDistinctTimeBySeansId(rezerwacjaBean.film.id)}" />            
+                            <f:convertDateTime dateStyle="short" timeZone="EST" type="both">
+
+                            </f:convertDateTime>
+                        </h:selectOneMenu><br />
+                    </div>
+                    <div>
+                        <h:outputText value="Nazwisko: " /><br />
+                        <h:inputText value="#{rezerwacjaBean.nazwisko}" id="surnameFied" >
+                            <f:validator validatorId="nameValidator.pl" />
+                        </h:inputText>
+                        <h:message for="surnameField" />
+                    </div>
+                    <div>
+                        <h:commandButton value="Dalej" action="#{seansBean.rezerwujSale}" class="btn btn-info"/>
+                    </div>
                 </h:form>
             </ui:define>
         </ui:composition>
