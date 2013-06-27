@@ -10,20 +10,18 @@
     <h:body>
         <ui:composition template="index.xhtml">
             <ui:define name="content">
-                <h2>Rezerwacja - etap 1</h2>
+                <h2>Rezerwacja na seans "#{rezerwacjaBean.film.nazwa}" - etap 1</h2>
                 <h:form>
-                    <h:outputText value="#{rezerwacjaBean.idFilmu}" /> <br />
-                    <h:outputText value="#{rezerwacjaBean.film.nazwa}" /> 
                     <h:outputLabel value="Wybierz godzinę:" />
                     <h:selectOneMenu value="#{seansBean.data}">
                         
-                        <f:selectItems value="#{seansBean.getDistinctTimeBySeansId(seansBean.idFilmu)}" />            
+                        <f:selectItems value="#{seansBean.getDistinctTimeBySeansId(rezerwacjaBean.film.id)}" />            
                         <f:convertDateTime dateStyle="short" timeZone="EST" type="both">
                             
                         </f:convertDateTime>
                     </h:selectOneMenu>
                     <h:inputText value="#{rezerwacjaBean.nazwisko}" />
-                    <h:commandButton value="Wyszukaj seanse" action="wybor_sali.xhtml" class="btn btn-info"/>
+                    <h:commandButton value="Dalej" action="wybor_sali.xhtml" class="btn btn-info"/>
                     
                 </h:form>
             </ui:define>

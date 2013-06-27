@@ -154,7 +154,7 @@ public class SeansBean {
         for(Seans s:seanse)
         {
             kal.setTime(s.getData());
-            String dat = ((Integer)kal.get(Calendar.DATE)).toString() + "." + ((Integer)kal.get(Calendar.MONTH)) + "." + ((Integer)kal.get(Calendar.YEAR));
+            String dat = ((Integer)kal.get(Calendar.DATE)).toString() + "." + ((Integer)kal.get(Calendar.MONTH) + 1) + "." + ((Integer)kal.get(Calendar.YEAR));
             dates.put(dat, s.getData());
         }
         
@@ -166,7 +166,11 @@ public class SeansBean {
         Map<String,Date> dates = new HashMap<String, Date>();
         Session session = klasy.HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
-        List<Seans> seanse = session.createQuery("from Seans").list();
+        List<Seans> seanse;
+        if (idFilmu == 0)
+            seanse = session.createQuery("from Seans").list();
+        else 
+            seanse = session.createQuery("from Seans s where s.idFilmu =" + idFilmu).list();
         session.getTransaction().commit();
         Calendar kal = new GregorianCalendar();
         
@@ -221,9 +225,10 @@ public class SeansBean {
         {
             Calendar kal = new GregorianCalendar();
             kal.setTime(seanse.get(i).getData());
-            
-            int hour = seanse.get(i).getData().getHours() - 7;
-            time += hour + ":" + kal.get(Calendar.MINUTE);
+            int hour = kal.get(Calendar.HOUR_OF_DAY);
+            int minute = kal.get(Calendar.MINUTE);
+            //int hour = seanse.get(i).getData().getHours() - 7;
+            time += hour + ":" + minute;
             if(i != seanse.size() - 1)
                 time += ";    ";
         }
