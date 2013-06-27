@@ -50,11 +50,11 @@
                             <f:facet name="header">
                                 Rezerwacja
                             </f:facet>
-                            <h:link value="Rezerwuj" outcome="rezerwacja.xhtml" class="btn btn-small btn-success"/>
+                            <h:commandLink  value="Rezerwuj" action="#{seansBean.rezerwuj(seans)}" class="btn btn-small btn-success"/>
                         </h:column>
                     </h:dataTable>
                 </h:form>
-                
+                #{rezerwacjaBean}
                 
             </ui:define>
         </ui:composition>

@@ -11,7 +11,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import klasy.Film;
 import klasy.Sala;
 import klasy.Seans;
@@ -22,7 +24,7 @@ import org.hibernate.Session;
  * @author mateusz
  */
 @ManagedBean
-@RequestScoped
+@SessionScoped
 public class SeansBean {
 
     /**
@@ -34,10 +36,12 @@ public class SeansBean {
     private Date data;
     private String toDate;
     
-    //private RezerwacjaBean rezerwacjaBean = new RezerwacjaBean();
+    @ManagedProperty(value="#{rezerwacjaBean}")  
+    private RezerwacjaBean rezerwacjaBean;
     
     public SeansBean() 
     {
+        this.rezerwacjaBean = new RezerwacjaBean();
     }
     public String addSeans()
     {
@@ -265,9 +269,20 @@ public class SeansBean {
         this.toDate = toDate;
     }
     
-    /*public void rezerwuj(Film f) {
-        rezerwacjaBean.setIdSeansu(this.id);
-    }*/
+    public RezerwacjaBean getRezerwacjaBean() {
+        return this.rezerwacjaBean;
+    }
+    
+    public void setRezerwacjaBean(RezerwacjaBean rezerwacja) {
+        this.rezerwacjaBean = rezerwacja;
+    }
+    
+    public String rezerwuj(Film f) {
+        System.out.println(f.getId());
+        this.rezerwacjaBean.setIdFilmu(f.getId());
+        this.rezerwacjaBean.setFilm(f);
+        return "rezerwacja";
+    }
     
     
 }

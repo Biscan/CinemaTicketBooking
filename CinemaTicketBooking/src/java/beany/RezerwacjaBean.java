@@ -9,22 +9,28 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import klasy.Rezerwacja;
 import org.hibernate.Session;
+import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
+import klasy.Film;
+
 
 /**
  *
  * @author babel
  */
 @ManagedBean
-@RequestScoped
+@SessionScoped
 public class RezerwacjaBean {
 
     private Integer id;
     private int idSeansu;
+    private int idFilmu;
     private int rzad;
     private int nrSiedzenia;
     private String nazwisko;
     private Boolean zatwierdzona;
-    private SeansBean seansBean = new SeansBean();
+    private Film film;
+    //private SeansBean seansBean = new SeansBean();
      
     /**
      * Creates a new instance of RezerwacjaBean
@@ -95,6 +101,14 @@ public class RezerwacjaBean {
     public void setIdSeansu(int idSeansu) {
         this.idSeansu = idSeansu;
     }
+    public int getIdFilmu() {
+        return this.idFilmu;
+    }
+    
+    public void setIdFilmu(int idFilmu) {
+        this.idFilmu = idFilmu;
+    }
+    
     public int getRzad() {
         return this.rzad;
     }
@@ -124,12 +138,20 @@ public class RezerwacjaBean {
         this.zatwierdzona = zatwierdzona;
     }
     
-    public SeansBean getSeansBean() {
+    /*public SeansBean getSeansBean() {
         return this.seansBean;
     }
     
     public void setSeansBean(SeansBean seansBean) {
         this.seansBean = seansBean;
+    }*/
+
+    public Film getFilm() {
+        return film;
+    }
+
+    public void setFilm(Film film) {
+        this.film = film;
     }
     
 }

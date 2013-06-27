@@ -12,10 +12,10 @@
             <ui:define name="content">
                 <h2>Rezerwacja - etap 1</h2>
                 <h:form>
-                    <h:outputText value="#{filmBean.id}" /> <br />
-                    <h:outputText value="#{seansBean.idFilmu}" /> <h:outputText value="#{rezerwacjaBean.seansBean.idFilmu}" />
+                    <h:outputText value="#{rezerwacjaBean.idFilmu}" /> <br />
+                    <h:outputText value="#{rezerwacjaBean.film.nazwa}" /> 
                     <h:outputLabel value="Wybierz godzinę:" />
-                    <h:selectOneMenu value="#{rezerwacjaBean.seansBean.data}">
+                    <h:selectOneMenu value="#{seansBean.data}">
                         
                         <f:selectItems value="#{seansBean.getDistinctTimeBySeansId(seansBean.idFilmu)}" />            
                         <f:convertDateTime dateStyle="short" timeZone="EST" type="both">
