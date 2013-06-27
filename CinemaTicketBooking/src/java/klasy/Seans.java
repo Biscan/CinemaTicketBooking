@@ -2,6 +2,7 @@ package klasy;
 // Generated 2013-05-31 18:05:26 by Hibernate Tools 3.2.1.GA
 
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.persistence.Column;
 import org.hibernate.annotations.Type;
@@ -62,6 +63,11 @@ public class Seans  implements java.io.Serializable {
     
     public Date getData() {
         return this.data;
+    }
+    
+    public String getDataString() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy kk:mm");
+        return dateFormat.format(this.data);
     }
     
     public void setData(Date data) {

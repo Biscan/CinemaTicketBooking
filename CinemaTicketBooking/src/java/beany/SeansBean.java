@@ -17,6 +17,7 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import klasy.Film;
 import klasy.HibernateUtil;
+import klasy.Rezerwacja;
 import klasy.Sala;
 import klasy.Seans;
 import org.hibernate.Session;
@@ -314,12 +315,35 @@ public class SeansBean {
         return "rezerwacja";
     }
     
-    public String rezerwujSale() {
+    public String wybierzSale() {
         Seans s = this.getSeansByDate();
         this.idSeansu = s.getId();
         this.rezerwacjaBean.setIdSeansu(this.idSeansu);
         this.rezerwacjaBean.setSeans(s);
         return "wybor_miejsca";
+    }
+    
+    public String rezerwujMiejsce() {
+        Integer idSiedzenia = this.rezerwacjaBean.getIdSiedzenia();
+        List<Integer> poz = this.rezerwacjaBean.idToPozycja(idSiedzenia);
+        this.rezerwacjaBean.setRzad(poz.get(0));
+        this.rezerwacjaBean.setNrSiedzenia(poz.get(1));
+        return "podsumowanie";
+    }
+    
+    public String potwierdzRezerwacje() {
+        RezerwacjaBean rb = this.rezerwacjaBean;
+        Rezerwacja r = new Rezerwacja();
+        r.setIdSeansu(rb.getIdSeansu());
+        r.setNazwisko(rb.getNazwisko());
+        r.setNrSiedzenia(rb.getNrSiedzenia());
+        r.setRzad(rb.getRzad());
+        r.setZatwierdzona(Boolean.FALSE);
+        
+        if (HibernateUtil.addEntity(r))
+            return "potwierdzenie";
+        else
+            return "niepowodzenie";
     }
 
     public int getIdSeansu() {

@@ -9,15 +9,14 @@
     <ui:define name="content">
         <h2>Rezerwacja na seans "#{rezerwacjaBean.film.nazwa}" - wybór miejsca w sali #{rezerwacjaBean.seans.sala.numer}</h2>
         <h:form>
-            <div></div>
             <div>
                 <h:outputLabel value="Wybierz miejsce:" />
-                <h:selectOneMenu value="#{rezerwacjaBean.rzadSiedzenie}">
+                <h:selectOneMenu value="#{rezerwacjaBean.idSiedzenia}">
                     <f:selectItems value="#{rezerwacjaBean.getFreeSeats()}" />            
                 </h:selectOneMenu><br />
             </div>
             <div>
-                <h:commandButton value="Zatwierdź" action="podsumowanie" class="btn btn-info"/>
+                <h:commandButton value="Dalej" action="#{seansBean.rezerwujMiejsce()}" class="btn btn-info"/>
             </div>
         </h:form> 
     </ui:define>

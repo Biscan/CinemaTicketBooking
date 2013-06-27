@@ -29,8 +29,8 @@ public class RezerwacjaBean {
     private int idSeansu;
     private int idFilmu;
     private int rzad;
-    private int nrSiedzenia;
-    private List<Integer> rzadSiedzenie;
+    private int nrSiedzenia; //nr w rzedzie
+    private int idSiedzenia; // unikalny numer na cala sale
     private String nazwisko;
     private Boolean zatwierdzona;
     private Film film;
@@ -165,9 +165,9 @@ public class RezerwacjaBean {
         this.seans = seans;
     }
 
-    public Map<String, List<Integer>> getFreeSeats() {
-        Map<String, List<Integer>> availableSeats = new TreeMap<String, List<Integer>>();
-        List<Rezerwacja> rezerwacje = HibernateUtil.executeHQLQuery("from Rezerwacja r where r.zatwierdzona=1 and r.idSeansu=" + this.idSeansu + " and r.nazwisko='" + this.nazwisko + "'");
+    public Map<String, Integer> getFreeSeats() {
+        Map<String, Integer> availableSeats = new TreeMap<String, Integer>();
+        List<Rezerwacja> rezerwacje = HibernateUtil.executeHQLQuery("from Rezerwacja r where r.idSeansu=" + this.idSeansu);
 
         for (int i = 1; i <= this.seans.getSala().getWysokosc(); ++i) {
             for (int j = 1; j <= this.seans.getSala().getSzerokosc(); ++j) {
@@ -180,9 +180,10 @@ public class RezerwacjaBean {
                 }
                 
                 if (available) {
-                    List<Integer> seat = new ArrayList<Integer>();
-                    seat.add(i);
-                    seat.add(j);
+                    List<Integer> poz = new ArrayList<Integer>();
+                    poz.add(i);
+                    poz.add(j);
+                    int seat = this.pozycjaToId(poz);
                     availableSeats.put("Rzad " + i + ", Siedzenie " + j, seat);
                 }
             }
@@ -191,11 +192,32 @@ public class RezerwacjaBean {
         return availableSeats;
     }
 
-    public List<Integer> getRzadSiedzenie() {
-        return rzadSiedzenie;
+    public int getIdSiedzenia() {
+        return idSiedzenia;
     }
 
-    public void setRzadSiedzenie(List<Integer> rzadSiedzenie) {
-        this.rzadSiedzenie = rzadSiedzenie;
+    public void setIdSiedzenia(int idSiedzenia) {
+        this.idSiedzenia = idSiedzenia;
     }
+
+    public int pozycjaToId(List<Integer> p) {
+        int rzad = p.get(0);
+        int nr = p.get(1);
+        int szer = this.seans.getSala().getSzerokosc();
+        int wys = this.seans.getSala().getWysokosc();
+        int id = (rzad - 1) * szer + nr;
+        return id;
+    }
+    
+    public List<Integer> idToPozycja(int id) {
+        int szer = this.seans.getSala().getSzerokosc();
+        int wys = this.seans.getSala().getWysokosc();
+        int rzad = ((id - 1) / szer) + 1;
+        int nrMiejsca = ((id - 1) % szer) + 1;
+        List<Integer> pozycja = new ArrayList<Integer>();
+        pozycja.add(rzad);
+        pozycja.add(nrMiejsca);
+        return pozycja;
+    }
+
 }
