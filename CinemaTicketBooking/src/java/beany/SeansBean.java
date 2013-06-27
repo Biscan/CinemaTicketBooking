@@ -4,6 +4,7 @@
  */
 package beany;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -149,12 +150,14 @@ public class SeansBean {
         session.beginTransaction();
         List<Seans> seanse = session.createQuery("from Seans").list();
         session.getTransaction().commit();
-        Calendar kal = new GregorianCalendar();
+        //Calendar kal = new GregorianCalendar();
         
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
         for(Seans s:seanse)
         {
-            kal.setTime(s.getData());
-            String dat = ((Integer)kal.get(Calendar.DATE)).toString() + "." + ((Integer)kal.get(Calendar.MONTH) + 1) + "." + ((Integer)kal.get(Calendar.YEAR));
+            String dat = dateFormat.format(s.getData());
+            //kal.setTime(s.getData());
+            //String dat = ((Integer)kal.get(Calendar.DATE)).toString() + "." + ((Integer)kal.get(Calendar.MONTH) + 1) + "." + ((Integer)kal.get(Calendar.YEAR));
             dates.put(dat, s.getData());
         }
         
@@ -172,12 +175,13 @@ public class SeansBean {
         else 
             seanse = session.createQuery("from Seans s where s.idFilmu =" + idFilmu).list();
         session.getTransaction().commit();
-        Calendar kal = new GregorianCalendar();
-        
+        //Calendar kal = new GregorianCalendar();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("kk:mm");
         for(Seans s:seanse)
         {
-            kal.setTime(s.getData());
-            String dat = ((Integer)kal.get(Calendar.HOUR)).toString() + ":" + ((Integer)kal.get(Calendar.MINUTE));
+            String dat = dateFormat.format(s.getData());
+            //kal.setTime(s.getData());
+            //String dat = ((Integer)kal.get(Calendar.HOUR)).toString() + ":" + ((Integer)kal.get(Calendar.MINUTE));
             dates.put(dat, s.getData());
         }
         
@@ -196,10 +200,12 @@ public class SeansBean {
             data = seanse2.get(0).getData();
         }
        
-        Calendar dat = new GregorianCalendar();
-        dat.setTime(data);
-        Integer month = dat.get(Calendar.MONTH) + 1;
-        String selection = (((Integer)dat.get(Calendar.YEAR) + "." + month + "." + (Integer)dat.get(Calendar.DATE)).toString());
+        //Calendar dat = new GregorianCalendar();
+        //dat.setTime(data);
+        //Integer month = dat.get(Calendar.MONTH) + 1;
+        //String selection = (((Integer)dat.get(Calendar.YEAR) + "." + month + "." + (Integer)dat.get(Calendar.DATE)).toString());
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd");
+        String selection = dateFormat.format(data);
         String query = "from Seans where DATE(data) = DATE('" + selection + "')";
         seanse = session.createQuery(query).list();
         query = "from Film where id in(";
@@ -223,12 +229,13 @@ public class SeansBean {
         String time = "";
         for(int i=0;i<seanse.size();++i)
         {
-            Calendar kal = new GregorianCalendar();
-            kal.setTime(seanse.get(i).getData());
-            int hour = kal.get(Calendar.HOUR_OF_DAY);
-            int minute = kal.get(Calendar.MINUTE);
+            //Calendar kal = new GregorianCalendar();
+            //kal.setTime(seanse.get(i).getData());
+            //int hour = kal.get(Calendar.HOUR_OF_DAY);
+            //int minute = kal.get(Calendar.MINUTE);
             //int hour = seanse.get(i).getData().getHours() - 7;
-            time += hour + ":" + minute;
+            SimpleDateFormat dateFormat = new SimpleDateFormat("kk:mm");
+            time += dateFormat.format(seanse.get(i).getData());
             if(i != seanse.size() - 1)
                 time += ";    ";
         }
