@@ -12,6 +12,12 @@
                 <h:dataTable value="#{seansBean.getSeanse()}" var="seans" border="1" class="table table-striped">
                     <h:column>
                         <f:facet name="header">
+                            Id
+                        </f:facet>
+                        #{seans.id}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
                             Nazwa Filmu
                         </f:facet>
                         #{seansBean.getFilmName(seans.idFilmu)}
