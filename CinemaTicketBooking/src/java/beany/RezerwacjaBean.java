@@ -5,7 +5,6 @@
 package beany;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -66,11 +65,18 @@ public class RezerwacjaBean {
     public String deleteRezerwacja(int id) {
         Session session = klasy.HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
-
+        System.out.println("id =" +id);
+        try{
         Rezerwacja rez = (Rezerwacja) session.get(Rezerwacja.class, id);
+        System.out.println("ID = " + rez.getId());
         session.delete(rez);
 
-        session.getTransaction().commit();
+        session.getTransaction().commit();}
+        catch(Exception ex)
+        {
+            System.out.println("Wyjątek!!!");
+            System.out.println(ex.getMessage());
+        }
         return "admin_rezerwacje";
     }
 

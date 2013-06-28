@@ -11,50 +11,49 @@
         <ui:composition template="admin_site.xhtml">
             <ui:define name="content">
                 <h2>Rezerwacje</h2>
-                <h:form>
-                    <h:dataTable value="#{rezerwacjaBean.getRezerwacje()}" var="rezerwacja" border="1" class="table table-striped">
+ 
+                    <h:dataTable value="#{rezerwacjaBean.getRezerwacje()}" var="rez" border="1" class="table table-striped">
                         <h:column>
                             <f:facet name="header">
                                 id seansu
                             </f:facet>
-                            #{rezerwacja.idSeansu}
+                            #{rez.idSeansu}
                         </h:column>
                         <h:column>
                             <f:facet name="header">
                                Nazwisko
                             </f:facet>
-                            #{rezerwacja.nazwisko}
+                            #{rez.nazwisko}
                         </h:column>
                         <h:column>
                             <f:facet name="header">
                                 Nr rzędu
                             </f:facet>
-                            #{rezerwacja.rzad}
+                            #{rez.rzad}
                         </h:column>
                         <h:column>
                             <f:facet name="header">
                                 Nr siedzenia
                             </f:facet>
-                            #{rezerwacja.nrSiedzenia}
+                            #{rez.nrSiedzenia}
                         </h:column>
                         <h:column>
                             <f:facet name="header">
                                 Zatwierdzono
                             </f:facet>
-                            #{rezerwacja.zatwierdzona}
+                            #{rez.zatwierdzona}
                         </h:column>
                         <h:column>
                             <f:facet name="header">
                                 Opcje
                             </f:facet>
                             <h:form>
-                                <h:commandButton value="Usuń" action="#{rezerwacjaBean.deleteRezerwacja(rezerwacja.id)}" class="btn btn-small btn-danger" />
-                                &nbsp;
-                                <h:commandButton value="Zmień status" action="#{rezerwacjaBean.zatwierdz(rezerwacja.id)}" class="btn btn-small btn-warning" />
+                                <h:commandLink value="Usuń" action="#{rezerwacjaBean.deleteRezerwacja(rez.id)}" class="btn btn-small btn-danger" /> &nbsp;
+                                <h:commandLink value="Zmień status" action="#{rezerwacjaBean.zatwierdz(rez.id)}" class="btn btn-small btn-warning" />
                             </h:form>
                         </h:column>
                     </h:dataTable>
-                </h:form>
+
             </ui:define>
         </ui:composition>
     </h:body>
